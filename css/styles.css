@@ -1,0 +1,91 @@
+/* global styles */
+@font-face {
+    font-family: "Arial";
+    src: url(fonts/arial-regular.ttf);
+   }
+   @font-face {
+    font-family: "Arial";
+    src: url(fonts/arial-italic.ttf);
+    font-style: italic; 
+   }
+   @font-face {
+    font-family: "Georgia";
+    src: url(fonts/georgia-regular.ttf);
+   }
+   @font-face {
+    font-family: "Georgia";
+    src: url(fonts/georgia-italic.ttf);
+    font-style: italic; 
+   }
+   @font-face {
+    font-family: "Georgia";
+    src: url(fonts/georgia-bold.ttf);
+   font-weight: bold;}
+   
+
+
+#textarea
+{
+width:50%;
+}
+#keyboard
+{
+display:flex;
+flex-direction: column;
+align-content:center;
+width:60%;
+max-width:800px;
+min-width:300px;
+margin: auto1;
+gap: 3px;
+}
+.keyboard-row
+{
+    display:grid;
+    grid-template-columns: repeat(15,auto);
+    gap: 3px;
+    align-content: stretch;
+    width:100%;
+
+   
+}
+.Double
+{
+    grid-column: span 2;
+}
+.SpaceButton
+{
+    grid-column: span 5;  
+}
+.onekey
+{
+    background-color: beige;
+    font-family: Arial, Helvetica, sans-serif;
+    color:black;
+    border: 1px solid #ccc;
+    box-shadow:
+    0 6px rgb(194, 194, 194),
+    0 3px 15px rgba(77, 75, 75, 0.4),
+    inset 0 1px rgba(255,255,255,.3),
+    inset 0 0 3px rgba(255,255,255,.5);
+    text-align: center;
+    height: 40px;
+    line-height: 40px;
+}
+.onekey:hover{
+    box-shadow:
+    0 0,
+    0 0,
+    inset 0 1px rgba(255,255,255,.3),
+    inset 0 0 3px rgba(255,255,255,.5);
+    transition: box-shadow 0.5s;
+}
+.onekey.Active{
+    background-color: rgb(76, 228, 96);
+    box-shadow:
+    0 0,
+    0 0,
+    inset 0 1px rgba(255,255,255,.3),
+    inset 0 0 3px rgba(255,255,255,.5);
+    transition: box-shadow 0.5s, background-color 0.5s;
+}
