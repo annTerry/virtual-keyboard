@@ -1,25 +1,25 @@
 /* global styles */
 @font-face {
     font-family: "Arial";
-    src: url(fonts/arial-regular.ttf);
+    src: url(../fonts/arial-regular.ttf);
    }
    @font-face {
     font-family: "Arial";
-    src: url(fonts/arial-italic.ttf);
+    src: url(../fonts/arial-italic.ttf);
     font-style: italic; 
    }
    @font-face {
     font-family: "Georgia";
-    src: url(fonts/georgia-regular.ttf);
+    src: url(../fonts/georgia-regular.ttf);
    }
    @font-face {
     font-family: "Georgia";
-    src: url(fonts/georgia-italic.ttf);
+    src: url(../fonts/georgia-italic.ttf);
     font-style: italic; 
    }
    @font-face {
     font-family: "Georgia";
-    src: url(fonts/georgia-bold.ttf);
+    src: url(../fonts/georgia-bold.ttf);
    font-weight: bold;}
    
 
@@ -88,4 +88,9 @@ gap: 3px;
     inset 0 1px rgba(255,255,255,.3),
     inset 0 0 3px rgba(255,255,255,.5);
     transition: box-shadow 0.5s, background-color 0.5s;
+}
+.shift{
+font-size: 0.6em;
+font-variant-position: sub;
+padding-left: 10px;
 }
