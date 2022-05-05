@@ -9,5 +9,6 @@ module.exports = {
         "ecmaVersion": "latest"
     },
     "rules": {
+        "import/extensions":["error","always",],
     }
 }
