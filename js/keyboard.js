@@ -2,19 +2,23 @@ import { keyBoardMatrix, keyboardProperties } from './data.js';
 import OneKey from './oneKey.js';
 
 class Keyboard {
+  CONST_MESSAGE = 'Переключение языка Ctrl + Alt. Разрабатывалось под Windows';
+
   row = [];
 
   keyMap = {};
 
   keyPressed = new Set();
 
+  keyClicked = new Set();
+
   constructor() {
+    this.language = localStorage.getItem('language') || '';
     Object.keys(keyboardProperties).forEach((oneKey) => {
       const keyProperty = keyboardProperties[oneKey];
       const el = new OneKey(oneKey, keyProperty.default || keyProperty.title, keyProperty);
       this.keyMap[oneKey] = el;
     });
-    this.language = localStorage.getItem('language') || '';
   }
 
   create() {
@@ -33,44 +37,88 @@ class Keyboard {
       const tmpRow = document.createElement('div');
       tmpRow.className = 'keyboard-row';
       rowArray.forEach((buttonElement) => {
-        tmpRow.append(keyboard.keyMap[buttonElement].thisElement());
+        const thisButtonObject = keyboard.keyMap[buttonElement];
+        const buttonValue = keyboard.getThisChar(keyboardProperties[buttonElement], true);
+        thisButtonObject.setNew(buttonValue.main, buttonValue.shift);
+        const thisButton = thisButtonObject.thisElement();
+        thisButton.addEventListener('mousedown', (event) => {
+          let element = event.target;
+          if (element.nodeName.toLowerCase() !== 'div') {
+            element = element.parentNode;
+          }
+          keyboard.buttonActionOn(element, element.id, true);
+          event.preventDefault();
+        });
+        thisButton.addEventListener('mouseup', (event) => {
+          let element = event.target;
+          if (element.nodeName.toLowerCase() !== 'div') {
+            element = element.parentNode;
+          }
+          keyboard.buttonActionOff(element, element.id, true);
+        });
+        tmpRow.append(thisButton);
       });
       this.keyBoard.append(tmpRow);
     });
+
     window.addEventListener('keydown', (event) => {
       event.preventDefault();
       event.stopImmediatePropagation();
       const element = document.getElementById(event.code);
-      keyboard.keyPressed.add(event.code);
-      if (element) {
-        const thisKeyProperty = keyboardProperties[event.code];
-        element.classList.add('Active');
-        if (thisKeyProperty.action === 'changeLanguage'
-        && (keyboard.keyPressed.has(thisKeyProperty.condition1)
-        || keyboard.keyPressed.has(thisKeyProperty.condition2))) {
-          keyboard.changeLanguage();
-        }
-      }
+      keyboard.buttonActionOn(element, event.code);
     });
     window.addEventListener('keyup', (event) => {
       const element = document.getElementById(event.code);
-      keyboard.keyPressed.delete(event.code);
-      if (element) {
-        element.classList.remove('Active');
-        const thisKeyProperty = keyboardProperties[event.code];
-        if (thisKeyProperty) {
-          const thisChar = keyboard.getThisChar(thisKeyProperty, true);
-          let value = keyboard.keyPressed.has('ShiftLeft')
-          || keyboard.keyPressed.has('ShiftRight') ? thisChar.shift : thisChar.main;
-          if (value) {
-            value = keyboard.keyPressed.has('ShiftLeft')
-            || keyboard.keyPressed.has('ShiftRight')
-            || keyboard.capsLock ? value.toUpperCase() : value.toLowerCase();
-            keyboard.textField.innerText = keyboard.textField.value + value;
-          }
+      keyboard.buttonActionOff(element, event.code);
+    });
+    const message = document.createElement('div');
+    message.className = 'message';
+    message.innerHTML = this.CONST_MESSAGE;
+    document.body.append(message);
+  }
+
+  buttonActionOn(element, keyCode, mouse) {
+    if (mouse) this.keyClicked.add(keyCode); else this.keyPressed.add(keyCode);
+    if (element) {
+      const thisKeyProperty = keyboardProperties[keyCode];
+      element.classList.add('Active');
+      if (thisKeyProperty && thisKeyProperty.action === 'changeLanguage'
+      && (this.keyPressed.has(thisKeyProperty.condition1)
+      || this.keyPressed.has(thisKeyProperty.condition2))) {
+        this.changeLanguage();
+      }
+    }
+  }
+
+  buttonActionOff(element, keyCode, mouse) {
+    const thisKeyProperty = keyboardProperties[keyCode];
+    if (element) {
+      if (thisKeyProperty) {
+        const thisChar = this.getThisChar(thisKeyProperty, true);
+        let value = this.keyPressed.has('ShiftLeft')
+        || this.keyPressed.has('ShiftRight') ? thisChar.shift : thisChar.main;
+        if (thisKeyProperty.action === 'CapsLock') {
+          this.capsLock = !this.capsLock;
+          if (this.capsLock) element.classList.add('CapsLock'); else element.classList.remove('CapsLock');
+        }
+        if (value) {
+          value = this.keyPressed.has('ShiftLeft')
+          || this.keyPressed.has('ShiftRight')
+          || this.capsLock ? value.toUpperCase() : value.toLowerCase();
+          this.textField.innerText = this.textField.value + value;
         }
       }
-    });
+    }
+    if (mouse) {
+      if (thisKeyProperty && thisKeyProperty.action === 'changeLanguage'
+    && (this.keyClicked.has(thisKeyProperty.condition1)
+      || this.keyClicked.has(thisKeyProperty.condition2))) this.changeLanguage();
+      this.keyClicked.forEach((code) => document.getElementById(code).classList.remove('Active'));
+      this.keyClicked.clear();
+    } else {
+      this.keyPressed.delete(keyCode);
+      if (element) element.classList.remove('Active');
+    }
   }
 
   getThisChar(thisKey, withDefault) {

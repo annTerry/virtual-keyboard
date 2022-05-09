@@ -1,4 +1,8 @@
 class OneKey {
+  main = '';
+
+  shift = '';
+
   constructor(keyCode, keyValue, keyProperty) {
     this.key = document.createElement('div');
     this.key.id = keyCode;
@@ -14,6 +18,17 @@ class OneKey {
 
   thisElement() {
     return this.key;
+  }
+
+  setNew(main, shift) {
+    if (main) {
+      this.key.innerHTML = `<span class="main-key">${main.toUpperCase()}</span>`;
+      if (shift) {
+        this.key.innerHTML += `<span class="shift">${shift}</span>`;
+      }
+      this.main = main;
+      this.shift = shift;
+    }
   }
 }
 export default OneKey;
