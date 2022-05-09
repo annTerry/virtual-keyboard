@@ -24,7 +24,12 @@ const keyboardProperties = {
   ArrowLeft: { default: '←' },
   ArrowRight: { default: '→' },
   ArrowUp: { default: '↑' },
-  Backquote: { default: '`', shift: '~', ru: 'Ё' },
+  Backquote: {
+    default: '`',
+    shift: '~',
+    ru: 'Ё',
+    ru_shift: 'Ё',
+  },
   Backslash: { default: '\\', shift: '|', ru_shift: '/' },
   Backspace: { title: 'Backspace', size: 'Double', action: 'Backspace' },
   BracketLeft: {
