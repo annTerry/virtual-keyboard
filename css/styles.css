@@ -24,20 +24,29 @@
    
 
 
-#textarea
+.main
 {
 width:50%;
+min-width:600px;
+margin:auto;
 }
 #keyboard
 {
 display:flex;
 flex-direction: column;
 align-content:center;
-width:60%;
 max-width:800px;
-min-width:300px;
-margin: auto1;
+min-width:600px;
+width:100%;
 gap: 3px;
+}
+#textField
+{
+    min-width:600px;
+    max-width:800px;
+    width:100%;
+    height:300px;
+    margin:10px auto;   
 }
 .keyboard-row
 {

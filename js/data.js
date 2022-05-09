@@ -8,9 +8,18 @@ const keyBoardMatrix = [
 
 const keyboardProperties = {
   AltLeft: {
-    title: 'Alt', size: 'Double', action: 'changeLanguage', condition: 'ControlLeft|ControlRight',
+    title: 'Alt',
+    size: 'Double',
+    action: 'changeLanguage',
+    condition1: 'ControlLeft',
+    condition2: 'ControlRight',
   },
-  AltRight: { title: 'Alt', action: 'changeLanguage', condition: 'ControlLeft|ControlRight' },
+  AltRight: {
+    title: 'Alt',
+    action: 'changeLanguage',
+    condition1: 'ControlLeft',
+    condition2: 'ControlRight',
+  },
   ArrowDown: { title: '&#8595;' },
   ArrowLeft: { title: '&#8592;' },
   ArrowRight: { title: '&#8594;' },
@@ -23,9 +32,18 @@ const keyboardProperties = {
   CapsLock: { title: 'CapsLock', size: 'Double' },
   Comma: { default: ',', shift: '&lt;', ru: 'Б' },
   ControlLeft: {
-    title: 'Ctrl', size: 'Double', action: 'changeLanguage', condition: 'AltLeft|AltRight',
+    title: 'Ctrl',
+    size: 'Double',
+    action: 'changeLanguage',
+    condition1: 'AltLeft',
+    condition2: 'AltRight',
   },
-  ControlRight: { title: 'Ctrl', action: 'changeLanguage', condition: 'AltLeft|AltRight' },
+  ControlRight: {
+    title: 'Ctrl',
+    action: 'changeLanguage',
+    condition1: 'AltLeft',
+    condition2: 'AltRight',
+  },
   Digit0: { default: '0', shift: ')' },
   Digit1: { default: '1', shift: '!' },
   Digit2: { default: '2', shift: '@', ru_sfift: '"' },

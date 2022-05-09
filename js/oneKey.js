@@ -2,7 +2,7 @@ class OneKey {
   constructor(keyCode, keyValue, keyProperty) {
     this.key = document.createElement('div');
     this.key.id = keyCode;
-    this.key.innerHTML = keyValue.toUpperCase();
+    this.key.innerHTML = `<span class="main-key">${keyValue.toUpperCase()}</span>`;
     this.key.classList.add('onekey');
     if (keyProperty && keyProperty.size) {
       this.key.classList.add(keyProperty.size);
