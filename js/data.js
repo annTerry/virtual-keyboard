@@ -28,14 +28,14 @@ const keyboardProperties = {
   Backslash: { default: '\\', shift: '|', ru_shift: '/' },
   Backspace: { title: 'Backspace', size: 'Double', action: 'Backspace' },
   BracketLeft: {
-    default: '[', shift: '{', ru: 'Х', ru_shift: ' ',
+    default: '[', shift: '{', ru: 'Х', ru_shift: 'Х',
   },
   BracketRight: {
-    default: ']', shift: '}', ru: 'Ъ', ru_shift: ' ',
+    default: ']', shift: '}', ru: 'Ъ', ru_shift: 'Ъ',
   },
   CapsLock: { title: 'CapsLock', size: 'Double', action: 'CapsLock' },
   Comma: {
-    default: ',', shift: '&lt;', ru: 'Б', ru_shift: ' ',
+    default: ',', shift: '&lt;', ru: 'Б', ru_shift: 'Б',
   },
   ControlLeft: {
     title: 'Ctrl',
@@ -91,13 +91,13 @@ const keyboardProperties = {
   Minus: { default: '-', shift: '_' },
   MetaLeft: { title: 'Win' },
   Period: {
-    default: '.', shift: '>', ru: 'Ю', ru_shift: ' ',
+    default: '.', shift: '>', ru: 'Ю', ru_shift: 'Ю',
   },
   Quote: {
-    default: "'", shift: '"', ru: 'Э', ru_shift: ' ',
+    default: "'", shift: '"', ru: 'Э', ru_shift: 'Э',
   },
   Semicolon: {
-    default: ';', shift: ':', ru: 'Ж', ru_shift: ' ',
+    default: ';', shift: ':', ru: 'Ж', ru_shift: 'Ж',
   },
   ShiftLeft: { title: 'Shift', size: 'Double', action: 'Shift' },
   ShiftRight: { title: 'Shift', action: 'Shift' },
