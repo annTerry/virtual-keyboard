@@ -71,6 +71,10 @@ class Keyboard {
       const element = document.getElementById(event.code);
       keyboard.buttonActionOff(element, event.code);
     });
+    window.addEventListener('mouseup', (event) => {
+      keyboard.clearClickList();
+      event.preventDefault();
+    });
     const message = document.createElement('div');
     message.className = 'message';
     message.innerHTML = this.CONST_MESSAGE;
@@ -82,6 +86,16 @@ class Keyboard {
     if (element) {
       const thisKeyProperty = keyboardProperties[keyCode];
       element.classList.add('Active');
+      if (thisKeyProperty && thisKeyProperty.action === 'Backspace') {
+        const newValue = this.textField.innerHTML.substring(0, this.textField.innerHTML.length - 1);
+        this.textField.value = newValue;
+      }
+      if (thisKeyProperty && thisKeyProperty.action === 'Enter') {
+        this.textField.value += '\r\n';
+      }
+      if (thisKeyProperty && thisKeyProperty.action === 'Tab') {
+        this.textField.value += '\t';
+      }
       if (thisKeyProperty && thisKeyProperty.action === 'changeLanguage'
       && (this.keyPressed.has(thisKeyProperty.condition1)
       || this.keyPressed.has(thisKeyProperty.condition2))) {
@@ -105,7 +119,7 @@ class Keyboard {
           value = this.keyPressed.has('ShiftLeft')
           || this.keyPressed.has('ShiftRight')
           || this.capsLock ? value.toUpperCase() : value.toLowerCase();
-          this.textField.innerText = this.textField.value + value;
+          this.textField.value += value;
         }
       }
     }
@@ -113,12 +127,16 @@ class Keyboard {
       if (thisKeyProperty && thisKeyProperty.action === 'changeLanguage'
     && (this.keyClicked.has(thisKeyProperty.condition1)
       || this.keyClicked.has(thisKeyProperty.condition2))) this.changeLanguage();
-      this.keyClicked.forEach((code) => document.getElementById(code).classList.remove('Active'));
-      this.keyClicked.clear();
+      this.clearClickList();
     } else {
       this.keyPressed.delete(keyCode);
       if (element) element.classList.remove('Active');
     }
+  }
+
+  clearClickList() {
+    this.keyClicked.forEach((code) => document.getElementById(code).classList.remove('Active'));
+    this.keyClicked.clear();
   }
 
   getThisChar(thisKey, withDefault) {

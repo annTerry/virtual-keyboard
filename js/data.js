@@ -27,10 +27,16 @@ const keyboardProperties = {
   Backquote: { default: '`', shift: '~', ru: 'Ё' },
   Backslash: { default: '\\', shift: '|', ru_shift: '/' },
   Backspace: { title: 'Backspace', size: 'Double', action: 'Backspace' },
-  BracketLeft: { default: '[', shift: '{', ru: 'Х' },
-  BracketRight: { default: ']', shift: '}', ru: 'Ъ' },
+  BracketLeft: {
+    default: '[', shift: '{', ru: 'Х', ru_shift: ' ',
+  },
+  BracketRight: {
+    default: ']', shift: '}', ru: 'Ъ', ru_shift: ' ',
+  },
   CapsLock: { title: 'CapsLock', size: 'Double', action: 'CapsLock' },
-  Comma: { default: ',', shift: '&lt;', ru: 'Б' },
+  Comma: {
+    default: ',', shift: '&lt;', ru: 'Б', ru_shift: ' ',
+  },
   ControlLeft: {
     title: 'Ctrl',
     size: 'Double',
@@ -46,15 +52,15 @@ const keyboardProperties = {
   },
   Digit0: { default: '0', shift: ')' },
   Digit1: { default: '1', shift: '!' },
-  Digit2: { default: '2', shift: '@', ru_sfift: '"' },
-  Digit3: { default: '3', shift: '#', ru_sfift: '№' },
-  Digit4: { default: '4', shift: '$', ru_sfift: ';' },
+  Digit2: { default: '2', shift: '@', ru_shift: '"' },
+  Digit3: { default: '3', shift: '#', ru_shift: '№' },
+  Digit4: { default: '4', shift: '$', ru_shift: ';' },
   Digit5: { default: '5', shift: '%' },
-  Digit6: { default: '6', shift: '^', ru_sfift: ':' },
-  Digit7: { default: '7', shift: '&', ru_sfift: '?' },
+  Digit6: { default: '6', shift: '^', ru_shift: ':' },
+  Digit7: { default: '7', shift: '&', ru_shift: '?' },
   Digit8: { default: '8', shift: '*' },
   Digit9: { default: '9', shift: ')' },
-  Enter: { title: 'Enter', size: 'Double' },
+  Enter: { title: 'Enter', size: 'Double', action: 'Enter' },
   Equal: { default: '=', shift: '+' },
   KeyA: { default: 'A', ru: 'Ф', gr: 'Α' },
   KeyB: { default: 'B', ru: 'И', gr: 'Β' },
@@ -84,16 +90,22 @@ const keyboardProperties = {
   KeyZ: { default: 'Z', ru: 'Я', gr: 'Ζ' },
   Minus: { default: '-', shift: '_' },
   MetaLeft: { title: 'Win' },
-  Period: { default: '.', shift: '>', ru: 'Ю' },
-  Quote: { default: "'", shift: '"', ru: 'Э' },
-  Semicolon: { default: ';', shift: ':', ru: 'Ж' },
-  ShiftLeft: { title: 'Shift', size: 'Double' },
-  ShiftRight: { title: 'Shift' },
+  Period: {
+    default: '.', shift: '>', ru: 'Ю', ru_shift: ' ',
+  },
+  Quote: {
+    default: "'", shift: '"', ru: 'Э', ru_shift: ' ',
+  },
+  Semicolon: {
+    default: ';', shift: ':', ru: 'Ж', ru_shift: ' ',
+  },
+  ShiftLeft: { title: 'Shift', size: 'Double', action: 'Shift' },
+  ShiftRight: { title: 'Shift', action: 'Shift' },
   Slash: {
-    default: '/', shift: '?', ru: '.', ru_sfift: ',', size: 'Double',
+    default: '/', shift: '?', ru: '.', ru_shift: ',', size: 'Double',
   },
   Space: { title: 'Space', default: ' ', size: 'SpaceButton' },
-  Tab: { title: 'Tab', size: 'Double' },
+  Tab: { title: 'Tab', size: 'Double', action: 'Tab' },
 };
 
 export { keyBoardMatrix, keyboardProperties };
