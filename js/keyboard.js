@@ -62,10 +62,12 @@ class Keyboard {
     });
 
     window.addEventListener('keydown', (event) => {
-      event.preventDefault();
-      event.stopImmediatePropagation();
       const element = document.getElementById(event.code);
-      keyboard.buttonActionOn(element, event.code);
+      if (element) {
+        event.preventDefault();
+        event.stopImmediatePropagation();
+        keyboard.buttonActionOn(element, event.code);
+      }
     });
     window.addEventListener('keyup', (event) => {
       const element = document.getElementById(event.code);
@@ -87,7 +89,7 @@ class Keyboard {
       const thisKeyProperty = keyboardProperties[keyCode];
       element.classList.add('Active');
       if (thisKeyProperty && thisKeyProperty.action === 'Backspace') {
-        const newValue = this.textField.innerHTML.substring(0, this.textField.innerHTML.length - 1);
+        const newValue = this.textField.value.substring(0, this.textField.value.length - 1);
         this.textField.value = newValue;
       }
       if (thisKeyProperty && thisKeyProperty.action === 'Enter') {
@@ -108,17 +110,16 @@ class Keyboard {
     const thisKeyProperty = keyboardProperties[keyCode];
     if (element) {
       if (thisKeyProperty) {
+        const shiftClicked = this.keyPressed.has('ShiftLeft') || this.keyPressed.has('ShiftRight')
+        || this.keyClicked.has('ShiftLeft') || this.keyClicked.has('ShiftRight');
         const thisChar = this.getThisChar(thisKeyProperty, true);
-        let value = this.keyPressed.has('ShiftLeft')
-        || this.keyPressed.has('ShiftRight') ? thisChar.shift : thisChar.main;
+        let value = thisChar.shift && shiftClicked ? thisChar.shift : thisChar.main;
         if (thisKeyProperty.action === 'CapsLock') {
           this.capsLock = !this.capsLock;
           if (this.capsLock) element.classList.add('CapsLock'); else element.classList.remove('CapsLock');
         }
         if (value) {
-          value = this.keyPressed.has('ShiftLeft')
-          || this.keyPressed.has('ShiftRight')
-          || this.capsLock ? value.toUpperCase() : value.toLowerCase();
+          value = shiftClicked || this.capsLock ? value.toUpperCase() : value.toLowerCase();
           this.textField.value += value;
         }
       }
