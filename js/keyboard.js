@@ -119,7 +119,8 @@ class Keyboard {
           if (this.capsLock) element.classList.add('CapsLock'); else element.classList.remove('CapsLock');
         }
         if (value) {
-          value = shiftClicked || this.capsLock ? value.toUpperCase() : value.toLowerCase();
+          value = (shiftClicked && !this.capsLock) || (!shiftClicked && this.capsLock)
+            ? value.toUpperCase() : value.toLowerCase();
           this.textField.value += value;
         }
       }
