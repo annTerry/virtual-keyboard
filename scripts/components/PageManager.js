@@ -14,7 +14,8 @@ export default class PageManager {
     });
   }
 
-  start() {
-    this.keyboard.start();
+  create() {
+    this.textarea.create();
+    this.keyboard.create();
   }
 }
