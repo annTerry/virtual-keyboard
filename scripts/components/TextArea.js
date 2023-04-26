@@ -10,4 +10,8 @@ export default class TextArea {
   create() {
     document.body.append(this.element);
   }
+
+  addValue(text) {
+    this.element.value += text;
+  }
 }

@@ -12,6 +12,12 @@ export default class PageManager {
       event.stopImmediatePropagation();
       this.keyboard.keyDown(event.code, event.shiftKey);
     });
+
+    window.addEventListener('keyup', (event) => {
+      event.preventDefault();
+      event.stopImmediatePropagation();
+      this.keyboard.keyUp(event.code, event.shiftKey);
+    });
   }
 
   create() {
