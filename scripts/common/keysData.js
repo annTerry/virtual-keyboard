@@ -21,14 +21,14 @@ const KEYS_DATA = {
     ru_shift: 'Ё',
   },
   Backslash: { default: '\\', shift: '|', ru_shift: '/' },
-  Backspace: { title: 'Backspace', styles: 'Double', action: 'Backspace' },
+  Backspace: { title: 'Backspace', styles: 'Double', action: 'backspace' },
   BracketLeft: {
     default: '[', shift: '{', ru: 'Х', ru_shift: 'Х',
   },
   BracketRight: {
     default: ']', shift: '}', ru: 'Ъ', ru_shift: 'Ъ',
   },
-  CapsLock: { title: 'CapsLock', styles: 'Double', action: 'CapsLock' },
+  CapsLock: { title: 'CapsLock', styles: 'Double', action: 'capsLock' },
   Comma: {
     default: ',', shift: '&lt;', ru: 'Б', ru_shift: 'Б',
   },
@@ -53,7 +53,7 @@ const KEYS_DATA = {
   Digit7: { default: '7', shift: '&', ru_shift: '?' },
   Digit8: { default: '8', shift: '*' },
   Digit9: { default: '9', shift: ')' },
-  Enter: { title: 'Enter', styles: 'Double', action: 'Enter' },
+  Enter: { title: 'Enter', styles: 'Double', action: 'enter' },
   Equal: { default: '=', shift: '+' },
   KeyA: { default: 'A', ru: 'Ф' },
   KeyB: { default: 'B', ru: 'И' },
@@ -92,13 +92,13 @@ const KEYS_DATA = {
   Semicolon: {
     default: ';', shift: ':', ru: 'Ж', ru_shift: 'Ж',
   },
-  ShiftLeft: { title: 'Shift', styles: 'Double', action: 'Shift' },
-  ShiftRight: { title: 'Shift', action: 'Shift' },
+  ShiftLeft: { title: 'Shift', styles: 'Double', action: 'shift' },
+  ShiftRight: { title: 'Shift', action: 'shift' },
   Slash: {
     default: '/', shift: '?', ru: '.', ru_shift: ',', styles: 'Double',
   },
   Space: { title: 'Space', default: ' ', styles: 'SpaceButton' },
-  Tab: { title: 'Tab', styles: 'Double', action: 'Tab' },
+  Tab: { title: 'Tab', styles: 'Double', action: 'tab' },
 };
 
 export default KEYS_DATA;

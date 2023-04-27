@@ -14,14 +14,16 @@ export default class Keyboard {
 
   rows = [];
 
-  keyboardStatus = new KeyboardStatus(this.language);
+  click = new Audio();
 
   constructor(textarea) {
+    this.click.src = '../../assets/audio/click.mp3';
     this.textarea = textarea;
+    this.keyboardStatus = new KeyboardStatus(this.language, this.textarea);
     KEYBOARD_SET.forEach((row) => {
       const oneRow = createElement('div', 'keyboard-row');
       row.forEach((key) => {
-        const newKey = new KeyOfKeyboard(key, textarea);
+        const newKey = new KeyOfKeyboard(key, this.keyboardStatus);
         this.allKeys[key] = newKey;
         oneRow.append(newKey.element);
       });
@@ -30,6 +32,7 @@ export default class Keyboard {
   }
 
   keyDown(keyCode) {
+    this.click.play();
     this.allKeys[keyCode].keyDown();
   }
 
