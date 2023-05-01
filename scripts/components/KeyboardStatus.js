@@ -1,9 +1,11 @@
+import { STORE_NAME, DEFAULT_LANGUAGE, ALTER_LANGUAGE } from '../common/const.js';
+
 export default class KeyboardStatus {
   capital = false;
 
   shift = false;
 
-  language = '';
+  language = window.localStorage.getItem(STORE_NAME) || DEFAULT_LANGUAGE;
 
   conditions = [];
 
@@ -19,9 +21,10 @@ export default class KeyboardStatus {
     del: this.doDel,
   };
 
-  constructor(language, textarea) {
-    this.language = language;
+  constructor(textarea, header) {
     this.textarea = textarea;
+    this.header = header;
+    this.header.setLanguage(this.language);
   }
 
   modifiers() {
@@ -45,7 +48,9 @@ export default class KeyboardStatus {
   }
 
   changeLanguageAction() {
-    this.language = this.language ? '' : 'ru';
+    this.language = this.language ? DEFAULT_LANGUAGE : ALTER_LANGUAGE;
+    window.localStorage.setItem(STORE_NAME, this.language);
+    this.header.setLanguage(this.language);
   }
 
   backspace(down) {

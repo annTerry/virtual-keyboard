@@ -1,27 +1,25 @@
 import TextArea from './TextArea.js';
 import Keyboard from './Keyboard.js';
-import { createElement } from '../common/utils.js';
+import Header from './Header.js';
+import KeyboardStatus from './KeyboardStatus.js';
 
 export default class PageManager {
   textarea = new TextArea();
 
-  header = createElement('h1','header','Virtual Keyboard');
+  header = new Header();
 
-  keyboard = new Keyboard(this.textarea);
+  keyboardStatus = new KeyboardStatus(this.textarea, this.header);
+
+  keyboard = new Keyboard(this.textarea, this.keyboardStatus);
 
   constructor() {
-    document.body.append(this.header);
+    document.body.append(this.header.element);
     window.addEventListener('keydown', (event) => {
-      event.preventDefault();
-      event.stopImmediatePropagation();
-      console.log(event.code);
-      this.keyboard.keyDown(event.code, event.shiftKey);
+      this.keyboard.keyDown(event);
     });
 
     window.addEventListener('keyup', (event) => {
-      event.preventDefault();
-      event.stopImmediatePropagation();
-      this.keyboard.keyUp(event.code, event.shiftKey);
+      this.keyboard.keyUp(event);
     });
   }
 
