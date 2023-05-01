@@ -21,7 +21,8 @@ const KEYS_DATA = {
     ru_shift: 'Ё',
   },
   Backslash: { default: '\\', shift: '|', ru_shift: '/' },
-  Backspace: { title: 'Backspace', styles: 'Double', action: 'backspace' },
+  Backspace: { title: 'Back', action: 'backspace' },
+  Delete: { title: 'Del', action: 'del' },
   BracketLeft: {
     default: '[', shift: '{', ru: 'Х', ru_shift: 'Х',
   },

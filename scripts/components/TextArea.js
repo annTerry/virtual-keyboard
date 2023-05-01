@@ -19,4 +19,9 @@ export default class TextArea {
     const currentValue = this.element.value;
     this.element.value = currentValue.slice(0, -1);
   }
+
+  delNext() {
+    const currentValue = this.element.value;
+    this.element.value = currentValue;
+  }
 }

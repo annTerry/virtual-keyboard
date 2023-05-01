@@ -10,6 +10,7 @@ export default class PageManager {
     window.addEventListener('keydown', (event) => {
       event.preventDefault();
       event.stopImmediatePropagation();
+      console.log(event.code);
       this.keyboard.keyDown(event.code, event.shiftKey);
     });
 

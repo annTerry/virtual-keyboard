@@ -16,6 +16,7 @@ export default class KeyboardStatus {
     enter: this.enter,
     shift: this.doShift,
     tab: this.doTab,
+    del: this.doDel,
   };
 
   constructor(language, textarea) {
@@ -50,6 +51,12 @@ export default class KeyboardStatus {
   backspace(down) {
     if (down) {
       this.textarea.delPrev();
+    }
+  }
+
+  doDel(down) {
+    if (down) {
+      this.textarea.delNext();
     }
   }
 
