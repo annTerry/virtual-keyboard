@@ -33,11 +33,22 @@ export default class KeyOfKeyboard {
     return this.keyData.default.toLowerCase();
   }
 
+  valueByModifiers(modifiers, result) {
+    if (modifiers.length > 1) {
+      const key = modifiers.join('_');
+      return this.keyData[key]
+      || this.keyData[modifiers[1]]
+      || this.keyData[modifiers[0]]
+      || result;
+    }
+    return this.keyData[modifiers] || result;
+  }
+
   currentSymbol() {
-    const modifiers = this.keyBoardStatus.modifiers().join('_');
+    const modifiers = this.keyBoardStatus.modifiers();
     let result = this.keyData.default;
     if (modifiers) {
-      result = this.keyData[modifiers] || result;
+      result = this.valueByModifiers(modifiers, result);
     }
     if (result) {
       if (this.keyBoardStatus.toCapital()) { return result.toUpperCase(); }

@@ -31,7 +31,7 @@ const KEYS_DATA = {
   },
   CapsLock: { title: 'CapsLock', styles: 'Double', action: 'capsLock' },
   Comma: {
-    default: ',', shift: '&lt;', ru: 'Б', ru_shift: 'Б',
+    default: ',', shift: '<', ru: 'Б', ru_shift: 'Б',
   },
   ControlLeft: {
     title: 'Ctrl',
@@ -53,7 +53,7 @@ const KEYS_DATA = {
   Digit6: { default: '6', shift: '^', ru_shift: ':' },
   Digit7: { default: '7', shift: '&', ru_shift: '?' },
   Digit8: { default: '8', shift: '*' },
-  Digit9: { default: '9', shift: ')' },
+  Digit9: { default: '9', shift: '(' },
   Enter: { title: 'Enter', styles: 'Double', action: 'enter' },
   Equal: { default: '=', shift: '+' },
   KeyA: { default: 'A', ru: 'Ф' },
