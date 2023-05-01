@@ -69,7 +69,7 @@ textarea {
     width: 75vw;
     margin: 0 auto;
     min-width: 500px;
-    flex-basis: 1;
+    //flex-basis: 1;
 }
 
 
@@ -83,16 +83,18 @@ textarea {
 
 .keyboard__btn {
     position: relative;
-    flex-basis: 1;
     flex-grow: 1;
-    height: 2em;
-    font-size: 1.5em;
+    height: 2.5em;
+    font-size: 1em;
+    line-height: 2em;
     border-radius: 10px;
     transition: transform 0.3s;
     transform-style: preserve-3d;
     background-color: black;
     border: 2px solid #999;
     color: aquamarine;
+    min-width: 50px;
+    max-width: 50px;
 
     &::before {
         position: absolute;
@@ -116,6 +118,14 @@ textarea {
             transform: translate3d(0, 0.5em, -1em);
             transition: 0.25s;
         }
+    }
+    &.Double {        
+        flex-grow: 2;
+        max-width: 1000px;
+    }
+    &.SpaceButton {        
+        flex-grow: 4;
+        max-width: 1000px;
     }
     &.Set {
         background-color: black;

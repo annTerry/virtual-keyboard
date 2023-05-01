@@ -17,6 +17,7 @@ export default class KeyOfKeyboard {
     this.keyCode = keyCode;
     if (keyData) {
       this.element.className = 'keyboard__btn';
+      if (keyData.styles) this.element.classList.add(keyData.styles);
       this.correctSymbol();
       this.element.addEventListener('mousedown', () => { this.mouseDown(); });
       this.element.addEventListener('mouseup', () => { this.mouseUp(); });
