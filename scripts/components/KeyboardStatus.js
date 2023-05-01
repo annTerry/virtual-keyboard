@@ -1,4 +1,7 @@
-import { STORE_NAME, DEFAULT_LANGUAGE, ALTER_LANGUAGE } from '../common/const.js';
+import {
+  STORE_NAME, DEFAULT_LANGUAGE, ALTER_LANGUAGE, LANG_LABEL,
+} from '../common/const.js';
+import { createElement } from '../common/utils.js';
 
 export default class KeyboardStatus {
   capital = false;
@@ -6,6 +9,8 @@ export default class KeyboardStatus {
   shift = false;
 
   language = window.localStorage.getItem(STORE_NAME) || DEFAULT_LANGUAGE;
+
+  languageElement = createElement('div', 'language-label', LANG_LABEL[`label_${this.language}`]);
 
   conditions = [];
 
@@ -25,6 +30,7 @@ export default class KeyboardStatus {
     this.textarea = textarea;
     this.header = header;
     this.header.setLanguage(this.language);
+    document.body.append(this.languageElement);
   }
 
   modifiers() {
@@ -40,7 +46,7 @@ export default class KeyboardStatus {
 
   changeLanguage(down, current, conditions) {
     if (down) {
-      if (!this.conditions.includes(current)) this.changeLanguageAction();
+      if (this.conditions.includes(current)) this.changeLanguageAction();
       else this.conditions = conditions;
     } else {
       this.conditions = [];
@@ -51,6 +57,7 @@ export default class KeyboardStatus {
     this.language = this.language ? DEFAULT_LANGUAGE : ALTER_LANGUAGE;
     window.localStorage.setItem(STORE_NAME, this.language);
     this.header.setLanguage(this.language);
+    this.languageElement.textContent = LANG_LABEL[`label_${this.language}`];
   }
 
   backspace(down) {
@@ -67,6 +74,9 @@ export default class KeyboardStatus {
 
   capsLock(down) {
     if (down) this.capital = !this.capital;
+    if (!down && this.capital) return { add: 'Set' };
+    if (!down && !this.capital) return { remove: 'Set' };
+    return '';
   }
 
   enter(down) {

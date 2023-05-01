@@ -17,6 +17,10 @@ export default class Keyboard {
     this.keyboardStatus = keyboardStatus;
     this.click.src = '../../assets/audio/click.mp3';
     this.textarea = textarea;
+    this.keyboardStatus.languageElement.addEventListener('click', () => {
+      this.keyboardStatus.changeLanguageAction();
+      this.changeKeys();
+    });
     KEYBOARD_SET.forEach((row) => {
       const oneRow = createElement('div', 'keyboard-row');
       row.forEach((key) => {
@@ -33,26 +37,34 @@ export default class Keyboard {
     if (currentKey) {
       event.preventDefault();
       event.stopImmediatePropagation();
-      if (down) {
+      if (down && !currentKey.down) {
         this.click.play();
         currentKey.keyDown();
-      } else {
+      } else if (!down) {
         this.click.pause();
         currentKey.keyUp();
       }
+      currentKey.down = down;
     }
+    this.changeKeys();
   }
 
   keyDown(event) {
     this.keyAction(event, true);
+    this.changeKeys();
   }
 
   keyUp(event) {
     this.keyAction(event, false);
+    this.changeKeys();
   }
 
   create() {
     document.body.append(this.element);
     this.rows.forEach((oneRow) => { this.element.append(oneRow); });
+  }
+
+  changeKeys() {
+    Object.values(this.allKeys).forEach((keyElement) => { keyElement.correctSymbol(); });
   }
 }

@@ -17,12 +17,14 @@ export default class KeyOfKeyboard {
     this.keyCode = keyCode;
     if (keyData) {
       this.element.className = 'keyboard__btn';
-      this.element.textContent = this.showOnKeySymbol();
+      this.correctSymbol();
       this.element.addEventListener('mousedown', () => { this.mouseDown(); });
       this.element.addEventListener('mouseup', () => { this.mouseUp(); });
-    } else {
-      console.log('Wrong data key', keyCode);
     }
+  }
+
+  correctSymbol() {
+    this.element.textContent = this.currentSymbol() || this.showOnKeySymbol();
   }
 
   showOnKeySymbol() {
@@ -44,24 +46,33 @@ export default class KeyOfKeyboard {
     return '';
   }
 
+  newStyleSet(newStyle) {
+    if (newStyle && newStyle.add) this.element.classList.add(newStyle.add);
+    if (newStyle && newStyle.remove) this.element.classList.remove(newStyle.remove);
+  }
+
   mouseDown() {
     this.element.classList.add('Active');
-    this.doAction(true, this.keyCode, this.keyData.conditions);
+    const newStyle = this.doAction(true, this.keyCode, this.keyData.conditions);
+    this.newStyleSet(newStyle);
   }
 
   mouseUp() {
-    this.doAction(false);
+    const newStyle = this.doAction(false);
     this.element.classList.remove('Active');
+    this.newStyleSet(newStyle);
   }
 
   keyDown() {
     this.element.classList.add('Active');
-    this.doAction(true, this.keyCode, this.keyData.conditions);
+    const newStyle = this.doAction(true, this.keyCode, this.keyData.conditions);
+    this.newStyleSet(newStyle);
   }
 
   keyUp() {
-    this.doAction(false);
+    const newStyle = this.doAction(false);
     this.element.classList.remove('Active');
+    this.newStyleSet(newStyle);
   }
 
   doAction(down) {
@@ -70,8 +81,15 @@ export default class KeyOfKeyboard {
     if (keyAction) {
       const action = this.keyBoardStatus.actions[keyAction];
       if (action) {
-        action.call(this.keyBoardStatus, down);
+        const newStyle = action.call(
+          this.keyBoardStatus,
+          down,
+          this.keyCode,
+          this.keyData.conditions,
+        );
+        if (newStyle) return newStyle;
       }
     }
+    return '';
   }
 }

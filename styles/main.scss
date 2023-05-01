@@ -8,6 +8,23 @@ body {
     background-color: #333;
     font-family: Arial, Helvetica, sans-serif;
 }
+.language-label {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    background-color: #395241;
+    color: aquamarine;
+    font-size: 1.5em;
+    line-height: 40px;
+    text-align: center;
+    cursor: pointer;
+    &:hover {
+      background-color: #666;
+    }
+}
 
 .header {
     margin: 2px auto;
@@ -100,13 +117,16 @@ textarea {
             transition: 0.25s;
         }
     }
-
+    &.Set {
+        background-color: black;
+        border-color: aquamarine;
+        border-width: 3px;
+    }
     &.Active {
         transform: translate3d(0, 0.6em, -1em);
         background-color: aquamarine;
         color: #333;
-        transition: transform 0.25s;
-
+        transition: transform 0.25s;        
         &::before {
             transform: translate3d(0, 0, -1em);
             transition: transform 0.25s;

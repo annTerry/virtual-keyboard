@@ -5,8 +5,8 @@ export const HEADER = {
     className: 'header__main',
   },
   h2: {
-    text_: 'Change language Ctrl+Shift',
-    text_ru: 'Смена языка Ctrl+Shift',
+    text_: 'Change language Ctrl+Alt',
+    text_ru: 'Смена языка Ctrl+Alt',
     className: 'header__sub',
   },
   h3: {
@@ -15,6 +15,8 @@ export const HEADER = {
     className: 'header__second-sub',
   },
 };
+
+export const LANG_LABEL = { label_: 'En', label_ru: 'Ру' };
 
 export const STORE_NAME = 'virtual-keyboard-lang';
 export const DEFAULT_LANGUAGE = '';
