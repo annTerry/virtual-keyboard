@@ -13,32 +13,56 @@ export default class TextArea {
   }
 
   addValue(text) {
-    this.element.value += text;
-    this.element.focus();
-    this.cursorPoint();
+    let currentValue = this.element.value;
+    const cursor = this.cursorPoint();
+    if (cursor.begin === cursor.end) {
+      currentValue = currentValue.substring(0, cursor.begin) + text
+                     + currentValue.substring(cursor.begin);
+    } else if (cursor.begin !== cursor.end) {
+      currentValue = currentValue.substring(0, cursor.begin) + text
+      + currentValue.substring(cursor.end);
+    } else return;
+    this.setValue(currentValue, cursor.begin + text.length);
   }
 
   delPrev() {
-    const currentValue = this.element.value;
-    this.element.value = currentValue.slice(0, -1);
-    this.element.focus();
-    this.cursorPoint();
+    let currentValue = this.element.value;
+    const cursor = this.cursorPoint();
+    if (cursor.begin === cursor.end && cursor.begin > 0) {
+      currentValue = currentValue.substring(0, cursor.begin - 1)
+                     + currentValue.substring(cursor.begin);
+    } else if (cursor.begin !== cursor.end) {
+      currentValue = currentValue.substring(0, cursor.begin)
+      + currentValue.substring(cursor.end);
+    } else return;
+    this.setValue(currentValue, cursor.begin - 1);
   }
 
   delNext() {
-    const currentValue = this.element.value;
-    this.element.value = currentValue;
-    this.element.focus();
-    this.cursorPoint();
+    let currentValue = this.element.value;
+    const cursor = this.cursorPoint();
+    if (cursor.begin === cursor.end && cursor.begin < currentValue.length) {
+      currentValue = currentValue.substring(0, cursor.begin)
+                     + currentValue.substring(cursor.begin + 1);
+    } else if (cursor.begin !== cursor.end) {
+      currentValue = currentValue.substring(0, cursor.begin)
+      + currentValue.substring(cursor.end);
+    } else return;
+    this.setValue(currentValue, cursor.begin);
   }
 
   cursorPoint() {
     const cursorEnd = this.element.selectionEnd;
-    const cursorBegin = this.element.selectionBegin;
-    console.log(cursorBegin, cursorEnd);
+    const cursorBegin = this.element.selectionStart;
+    return { begin: cursorBegin, end: cursorEnd };
   }
 
-  doSelect() {
-    this.cursorPoint();
+  setValue(currentValue, cursor) {
+    this.element.value = currentValue;
+    this.element.focus();
+    if (cursor !== undefined) {
+      this.element.selectionStart = cursor;
+      this.element.selectionEnd = cursor;
+    }
   }
 }
