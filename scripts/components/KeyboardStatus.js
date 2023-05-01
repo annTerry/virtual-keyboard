@@ -8,6 +8,8 @@ export default class KeyboardStatus {
 
   shift = false;
 
+  currentDownMouse = null;
+
   language = window.localStorage.getItem(STORE_NAME) || DEFAULT_LANGUAGE;
 
   languageElement = createElement('div', 'language-label', LANG_LABEL[`label_${this.language}`]);

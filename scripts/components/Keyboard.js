@@ -11,14 +11,17 @@ export default class Keyboard {
 
   rows = [];
 
-  click = new Audio();
-
   constructor(textarea, keyboardStatus) {
     this.keyboardStatus = keyboardStatus;
-    this.click.src = '../../assets/audio/click.mp3';
     this.textarea = textarea;
     this.keyboardStatus.languageElement.addEventListener('click', () => {
       this.keyboardStatus.changeLanguageAction();
+      this.changeKeys();
+    });
+    this.element.addEventListener('mouseup', () => {
+      this.changeKeys();
+    });
+    this.element.addEventListener('mousedown', () => {
       this.changeKeys();
     });
     KEYBOARD_SET.forEach((row) => {
@@ -38,10 +41,8 @@ export default class Keyboard {
       event.preventDefault();
       event.stopImmediatePropagation();
       if (down && !currentKey.down) {
-        this.click.play();
         currentKey.keyDown();
       } else if (!down) {
-        this.click.pause();
         currentKey.keyUp();
       }
       currentKey.down = down;

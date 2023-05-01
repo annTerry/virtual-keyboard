@@ -66,10 +66,19 @@ export default class KeyOfKeyboard {
   mouseDown() {
     this.element.classList.add('Active');
     const newStyle = this.doAction(true, this.keyCode, this.keyData.conditions);
+    this.keyBoardStatus.currentDownMouse = this;
     this.newStyleSet(newStyle);
   }
 
   mouseUp() {
+    const { currentDownMouse } = this.keyBoardStatus;
+    if (currentDownMouse && currentDownMouse !== this) {
+      const newStyle = this.doAction(true);
+      this.newStyleSet(newStyle);
+      currentDownMouse.element.classList.remove('Active');
+      const upStyle = currentDownMouse.doAction(false);
+      this.newStyleSet(upStyle);
+    }
     const newStyle = this.doAction(false);
     this.element.classList.remove('Active');
     this.newStyleSet(newStyle);
